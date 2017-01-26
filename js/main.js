@@ -46,4 +46,3 @@ console.log(testText.replace(/"(.+?)"/g, function (elem) {
 }))
 
 console.log(testText.replace(/"(.+?)"/g, 123));
-
