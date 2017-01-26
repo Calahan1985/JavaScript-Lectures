@@ -36,6 +36,14 @@ console.log(testRegExp(testText, /"(.+?)"/g));
 console.log(testRegExp(testText, /.+/g));
 console.log(testRegExp(testText, /.+/g));
 
-// console.log(testText.replace(/"(.+?)"/g, function (elem) {
-	
-// })
+console.log(testText.replace(/"(.+?)"/g, function (elem) {
+	if (elem === "\"asd\"") {
+		return elem;
+	}
+	else {
+		return 123;
+	}
+}))
+
+console.log(testText.replace(/"(.+?)"/g, 123));
+
