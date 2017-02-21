@@ -1,9 +1,16 @@
 .mainTitle {
 	text-align:center;
+	position: relative;
+	top: 100px;
+	min-width: 120%;
 }
 .mainTitle .logo {
 	width:100px;
 	vertical-align:middle;
+	padding: 10px;
+	margin: 8px;
+	border: 5px solid black;
+	box-shadow: 0 0 15px inset;
 }
 .mainTitle .text {
 	vertical-align:middle;
