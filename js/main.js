@@ -1,11 +1,13 @@
 (function () {
 	"use strict";
 	angular.module("app", [
-		"price"
+		"price",
+		"toHtml"
 	]).run(function ($templateCache) {
 		$templateCache.put('myTemplate.html', 'This is the content of</br> the template');
 	});
 }) ();
+
 (function () {
 	"use strict";
 	angular.module("price", [])
@@ -42,9 +44,33 @@
 		myCtrl.serverData = {};
 		myCtrl.userAction = "";
 		myCtrl.askUser = askUser;
-		myCtrl.html = $sce.trustAsHtml("<h1>test text</h1>");
-		myCtrl.html2 = $sce.trustAsHtml($templateCache.get("myTemplate.html"));
+		myCtrl.html = "<h1>test text</h1>";
+		myCtrl.html2 = $templateCache.get("myTemplate.html");
 		myCtrl.timer = new Date().getSeconds();
+		myCtrl.date = $.now();
+		myCtrl.usersFilter = "";
+		myCtrl.usersFilterMethod = usersFilterMethod;
+		myCtrl.onBlur = onBlur;
+		myCtrl.names = [];
+		myCtrl.selectedOption = "";
+		myCtrl.imageSrc = "";
+		
+		myCtrl.options = [
+			{value: "", label: "Select item"},
+			{value: "item1", label: "Item1 label"},
+			{value: "item2", label: "Item2 label"},
+			{value: "item3", label: "Item3 label"},
+			{value: "item4", label: "Item4 label"},
+			{value: "item5", label: "Item5 label"}
+		];
+		
+		function onBlur($event) {
+			console.log($event);
+		}
+		
+		function usersFilterMethod(elem, index, array) {
+			return ~elem.name.toLowerCase().indexOf(myCtrl.usersFilter.toLowerCase());
+		}
 		
 		$scope.$applyAsync(function () {
 			myCtrl.serverData = {"myKey1": "asdasd"};
@@ -60,6 +86,7 @@
 		function askUser() {
 			myModal().then(function (userAnswer) {
 				myCtrl.userAction = userAnswer;
+				myCtrl.imageSrc = "images/logo.png";
 			})
 		}
 		
@@ -70,5 +97,26 @@
 			}, 5000);
 			return deffered.promise;
 		}
+		$interval(function(item) {
+			myCtrl.timer = new Date().getSeconds();
+		}, 1000, 5, true, new Date().getSeconds());
 	}
 })();
+
+(function () {
+	"use strict";
+	
+})
+
+
+
+
+
+
+
+
+
+
+
+
+

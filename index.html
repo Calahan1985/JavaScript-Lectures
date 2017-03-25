@@ -11,20 +11,69 @@
 	</head>
 	<body ng-app="app"> <!-- rootScope -->
 		<!-- This is base template for testing -->
-		<div ng-controller="myCtrl as myCtrl">
-			<h1 class="mainTitle">
+		<div class="controller" ng-controller="myCtrl as myCtrl">
+			<h1 class="mainTitle" ng-if="myCtrl.usersFilter !== '2'">
 				<img class="logo" src="images/logo.png" alt=""/>
 				<span class="text">{{myCtrl.price + 25 | price}}</span>
 			</h1>
 			<h1>{{myCtrl.serverData.myKey2 | price}}</h1>
 			<button type="button" ng-click="myCtrl.askUser()">Ask user</button>
 			<p>{{myCtrl.userAction}}</p>
-			<div>
-				ng-bind-html="myCtrl.html | toHtml"
+			<div ng-bind-html="myCtrl.html | toHtml">
+				
 			</div>
-			<div>
-				ng-bind-html="myCtrl.html2 | toHtml"
+			<div ng-bind-html="myCtrl.html2 | toHtml">
+				
 			</div>
+			<h1 ng-mousemove="myCtrl.timer = $event.clientX">Timer: {{myCtrl.timer}}</h1>
+			<h2>{{myCtrl.date | date: 'dd/MM/yy'}}</h2>
+			<input type="text" 
+			ng-model="myCtrl.usersFilter" 
+			ng-model-options="{
+				updateOn: 'blur',
+				debounce: 1000
+			}"
+			ng-blur="myCtrl.serverData.myKey2 = myCtrl.serverData.myKey2 + ' blur'; myCtrl.onBlur($event)" 
+			ng-keyup="$event.keyCode === 13 && myCtrl.onBlur($event.keyCode)"
+			ng-change="myCtrl.onBlur('ngChange')"
+			ng-focus="myCtrl.onBlur('ngFocus')"/>
+			<h1>{{myCtrl.selectedOption}}</h1>
+			Required input <input type="text" ng-required="!myCtrl.selectedOption">
+			<select
+				ng-model="myCtrl.selectedOption"
+				ng-options="item.value as item.label for item in myCtrl.options"
+			></select>
+			<h3 ng-switch="myCtrl.selectedOption"></p>
+				<span ng-switch-when="item1">
+					item1
+				</span>
+				<span ng-switch-when="item2">
+					item2
+				</span>
+				<span ng-switch-default>
+					Default
+				</span>
+			</h3>
+			<div>{{myCtrl.names}}</div>
+			<input type="checkbox" ng-checked="null == undefined"
+			ng-disabled="myCtrl.usersFilter.length"/>
+			<h1 ng-show="myCtrl.usersFilter.length">{{2334342535.232344221 | number | price}}</h1>
+			<ul>
+				<li ng-repeat="user in myCtrl.serverData.testArray | filter: myCtrl.usersFilterMethod | orderBy: 'age': true | limitTo: 3 track by user.email"
+				ng-init="myCtrl.names[$index] = user.name"
+				ng-class="{
+					'classRed': $first,
+					'classBlue': $last}">
+				<!-- <li ng-repeat="user in myCtrl.serverData.testArray track by $index"></li> -->
+				<!-- :: - inable singlewatch -->
+					<h2>{{::user.name | lowercase}}</h2>
+					<h2>{{::user.email | uppercase}}</h2>
+					<h3>Age: {{::user.age}}</h3>
+					<h3>{{$first}}</h3>
+					<h3>{{$index}}</h3>
+					<h3>{{$last}}</h3>
+				</li>	
+			</ul>
 		</div>
 	</body>
 </html>
