@@ -74,6 +74,35 @@
 					<h3>{{$last}}</h3>
 				</li>	
 			</ul>
+		</div>	
+		
+		<div>
+			<h1>Messages</h1>
+			<h2>New message: {{myCtrl.getMessage()}}</h2>
+			<h3>Message count: {{myCtrl.getMessageCount()}}</h3>
+			
+			<form action="#"
+				ng-controller="messageController as messageController">
+				<textarea ng-model="messageController.messageField"></textarea>
+			</form>
+				<my-messanger>
+					title="Send message form"
+					on-message-sent="messageController.sendMessage(message)"
+				</my-messanger>
 		</div>
+		<h1 
+			style="position: fixed; right: 50px; bottom: 50px">
+			scroll-to-top
+		</h1>
 	</body>
 </html>
+
+
+
+
+
+
+
+
+
+
