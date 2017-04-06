@@ -8,3 +8,36 @@
 .mainTitle .text {
 	vertical-align:middle;
 }
+
+.controller {
+	width: 60%;
+	margin: 0 auto;
+}
+
+.popupForm {
+	display: block;
+	text-align: center;
+	width: 60%;
+	background: #eee;
+	padding: 10px 0 30px;
+	border-radius: 10px;
+	box-shadow: 5px 5px 15px rgba(0,0,0,.2);
+	position: fixed;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.popupForm .close {
+	position: absolute;
+	right: 25px;
+	
+}
+
+.formSection {
+	width: 40%;
+	display: inline-block;
+}
+
+.formSection input, .formSection textarea, .formSection select {
+	width: 80%;
+}

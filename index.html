@@ -7,12 +7,69 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
 		<script src="js/main.js" defer></script>
+		<script src="js/newsfeedModule.js" defer></script>
+		<script src="js/newsfeedController.js" defer></script>
+		<script src="js/newsfeedUrlConstants.js" defer></script>
 	</head>
-	<body>
+	<body ng-app="app" ng-cloak>
 		<!-- This is base template for testing -->
 		<h1 class="mainTitle">
 			<img class="logo" src="images/logo.png" alt=""/>
-			<span class="text">Base template</span>
+			<span class="text">Newsfeed</span>
 		</h1>
+		<div 
+			ng-controller="newsfeed as newsfeed"
+		>
+			<div class="popupForm">
+				<form name="newsfeed.newArticleForm">
+				<div class="formSection">
+				<p>Article type</p>
+				<select
+					ng-model="newsfeed.newArticleModel.type"
+				>
+					<option value="article">Article</option>
+					<option value="photos">Photos</option>
+					<option value="video">Video</option>
+				</select>	
+				<input type="text"
+					ng-model="newsfeed.newArticleModel.title"
+				/>
+				<input type="text"
+					ng-model="newsfeed.newArticleModel.mainPhoto"
+				/>
+				<textarea
+					ng-model="newsfeed.newArticleModel.description"
+				></textarea>
+				<input type="text"
+					ng-repeat="photo in newsfeed.newArticleModel.photos track by $index"
+					ng-model="newsfeed.newArticleModel.photos[$index]"
+				/>
+				<p>Video</p>
+				<input type="text"
+					ng-model="newsfeed.newArticleModel.video"
+				/>
+				<button type="button"
+					ng-click="newsfeed.saveArticle()"
+				>Save</button>
+				<div class="formSection">
+					<button type="button"
+						ng-click="newsfeed.hideEditPopup()"
+					>Cancel</button>
+				</div>
+			    </div>
+			</div>	
 	</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
