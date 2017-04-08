@@ -10,6 +10,7 @@
 		<script src="js/newsfeedModule.js" defer></script>
 		<script src="js/newsfeedController.js" defer></script>
 		<script src="js/newsfeedUrlConstants.js" defer></script>
+		<script src="js/newsfeedDescriptionFilter.js" defer></script>
 	</head>
 	<body ng-app="app" ng-cloak>
 		<!-- This is base template for testing -->
@@ -57,6 +58,40 @@
 					>Cancel</button>
 				</div>
 			    </div>
+				<!-- Popup end -->
+				<!-- Article list start -->
+				<ul>
+					<li ng-repeat="article in newsfeed.articles track by $index">
+						<h3>{{Article.title}}</h3>
+						<span>{{Article.createdDate}}</span>
+						<div class="article">
+							<img ng-src="{{article.mainPhoto}}">
+							<p>{{article.description}}</p>
+						</div>
+						<div class="photos">
+							<img
+								ng-repeat="photo in article.photos track by $index"
+								ng-src="{{photo}}"
+							/>	
+						</div>
+						<div class="video">
+							<a href="{{article.video}}" target="_blank">
+								<img
+									ng-src="{{article.mainPhoto}}"
+								/>
+							</a>
+						</div>
+						<div class="editButtons">
+							<button type="button"
+								ng-click="newsfeed.showEditPopup(article)"
+							>Edit</button>
+							<button type="button"
+								ng-click="newsfeed.deleteArticle(article, $index)"
+							>Delete</button>
+						</div>
+					</li>
+				</ul>
+				<!-- Article list en -->
 			</div>	
 	</body>
 </html>

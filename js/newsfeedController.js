@@ -16,7 +16,8 @@
 		newsfeed.showEditPopup = showEditPopup;
 		newsfeed.hideEditPopup = hideEditPopup;
 		newsfeed.getEmptyModel = getEmptyModel;
-		
+		newsfeed.removePhoto = removePhoto;
+				
 		//Functions
 		function showEditPopup(modelForEdit) {
 			newsfeed.editPopupVisible = true;
@@ -57,9 +58,22 @@
 			}
 		}
 		
+		function deleteArticle($index) {
+			$http.delete(NEWSFEED_URL_COSTANS["DELETE_ARTICLE"] + 
+				"?id="+article.id).then(function() {
+					newsfeed.articles.splice($insex, 1);
+				});
+		}
+		
 		//Initialization
 		(function () {
-			
+			$http.get(NEWSFEED_URL_COSTANS["GET_NEWSFEED"]).then(function (response) {
+				newsfeed.articles = response.data;
+			})
 		})();
 	}	
 })();
+
+
+
+
